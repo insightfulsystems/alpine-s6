@@ -20,12 +20,14 @@ before_install:
 jobs:
   include:
     - stage: amd64
+      name: amd64
       script:
         - make wrap-amd64
         - make build-amd64
         - docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
         - make push-amd64
     - stage: arm32v6
+      name: arm32v6
       script:
         - make qemu
         - make wrap-arm32v6
@@ -33,6 +35,7 @@ jobs:
         - docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
         - make push-arm32v6
     - stage: arm32v7
+      name: arm32v7
       script:
         - make qemu
         - make wrap-arm32v7
@@ -40,6 +43,7 @@ jobs:
         - docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
         - make push-arm32v7
     - stage: manifest
+      name: Docker manifest
       script:
         - docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
         - make manifest
