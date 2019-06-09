@@ -23,7 +23,7 @@ qemu:
 	cp qemu-arm-static ../qemu/
 
 wrap:
-	$(foreach arch, $(TARGET_ARCHITECTURES), make wrap-$(arch);)
+	$(foreach ARCH, $(TARGET_ARCHITECTURES), make wrap-$(ARCH);)
 
 wrap-amd64:
 	docker pull amd64/$(ALPINE_VERSION)
