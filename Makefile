@@ -69,7 +69,7 @@ push-%:
 	docker push $(IMAGE_NAME):$(ARCH)
 
 expand-%: # expand architecture variants for manifest
-	@if [[ "$*" == "amd64" ]] ; then \
+	@if [ "$*" == "amd64" ] ; then \
 	   echo '--arch $*'; \
 	elif [[ "$*" == *"arm"* ]] ; then \
 	   echo '--arch arm --variant $*' | cut -c 1-21,27-; \
