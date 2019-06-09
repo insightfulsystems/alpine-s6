@@ -20,14 +20,14 @@ before_install:
 jobs:
   include:
     - stage: amd64
-      name: AMD and Intel (x86_64)
+      name: Intel/AMD 64-bit (x86_64)
       script:
         - make wrap-amd64
         - make build-amd64
         - docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
         - make push-amd64
     - stage: arm32v6
-      name: ARM6 (Older Raspberry Pis, Pi Zero, usually soft float)
+      name: ARM6 32-bit (Older Raspberry Pis, Pi Zero, usually soft float)
       script:
         - make qemu
         - make wrap-arm32v6
