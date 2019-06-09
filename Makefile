@@ -79,7 +79,7 @@ manifest:
 	docker manifest create --amend \
 		$(IMAGE_NAME):latest \
 		$(foreach ARCH, $(TARGET_ARCHITECTURES), $(IMAGE_NAME):$(ARCH) )
-	$(foreach arch, $(TARGET_ARCHITECTURES), \
+	$(foreach ARCH, $(TARGET_ARCHITECTURES), \
 		docker manifest annotate \
 			$(IMAGE_NAME):latest \
 			$(IMAGE_NAME):$(ARCH) $(shell make expand-$(ARCH));)
