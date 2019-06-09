@@ -15,6 +15,7 @@ RUN apk add --no-cache --purge -uU \
 		--home /config \
 		--ingroup users \
 		--no-create-home \
+		--shell /bin/false \
 		--uid 911 \
 		abc \
  && mkdir -p /app /defaults \
