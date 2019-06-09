@@ -18,7 +18,7 @@ RUN apk add --no-cache --purge -uU \
 		--shell /bin/false \
 		--uid 911 \
 		abc \
- && mkdir -p /app /defaults \
+ && mkdir -p /app /config /data /defaults \
  && rm -rf /var/cache/apk/* /tmp/*
 
 COPY rootfs /
