@@ -11,5 +11,9 @@ RUN apk add --no-cache --purge -uU \
  && apk del --purge curl \
  && useradd -u 911 -U -d /config -s /bin/false abc \
  && usermod -G users abc \
- && mkdir -p /app /data /config /defaults \
+ && mkdir -p /app /config /defaults \
  && rm -rf /var/cache/apk/* /tmp/*
+
+COPY rootfs /
+
+ENTRYPOINT [ "/init" ]
