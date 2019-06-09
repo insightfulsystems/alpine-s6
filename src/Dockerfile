@@ -12,6 +12,7 @@ RUN apk add --no-cache --purge -uU \
  && curl https://keybase.io/justcontainers/key.asc | gpg --import \
  && gpg --verify /tmp/s6-overlay-${ARCH}.tar.gz.sig /tmp/s6-overlay-${ARCH}.tar.gz \
  && tar xzf /tmp/s6-overlay-${ARCH}.tar.gz -C / \
+ && rm -f /tmp/s6-overlay-* \
  && apk del --purge \
     curl \
 	gnupg \
