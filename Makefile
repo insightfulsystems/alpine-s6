@@ -12,7 +12,7 @@ export SHELL=/bin/bash
 # Permanent local overrides
 -include .env
 
-.PHONY: s6 qemu wrap push manifest clean
+.PHONY: build qemu wrap push manifest clean
 
 qemu:
 	-docker run --rm --privileged multiarch/qemu-user-static:register --reset
@@ -38,8 +38,8 @@ wrap-%:
 		--build-arg VCS_URL=$(VCS_URL) \
 		-t $(BUILD_IMAGE_NAME):$(ARCH) qemu
 
-s6:
-	$(foreach ARCH, $(TARGET_ARCHITECTURES), make s6-$(ARCH);)
+build:
+	$(foreach ARCH, $(TARGET_ARCHITECTURES), make build-$(ARCH);)
 
 
 translate-%: # translate our architecture mappings to s6's
@@ -51,14 +51,14 @@ translate-%: # translate our architecture mappings to s6's
 		echo $*; \
 	fi 
 
-s6-%:
+build-%:
 	$(eval ARCH := $*)
 	docker build --build-arg BUILD_DATE=$(BUILD_DATE) \
 		--build-arg ARCH=$(shell make translate-$(ARCH);) \
 		--build-arg BASE=$(BUILD_IMAGE_NAME):$(ARCH) \
 		--build-arg VCS_REF=$(VCS_REF) \
 		--build-arg VCS_URL=$(VCS_URL) \
-		-t $(IMAGE_NAME):$(ARCH) s6
+		-t $(IMAGE_NAME):$(ARCH) src
 	@echo "--- Done building $(ARCH) ---"
 
 push:
